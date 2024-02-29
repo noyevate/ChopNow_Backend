@@ -7,8 +7,8 @@ const CategoryRoute = require("./routes/Category");
 const RestaurantRoute = require("./routes/Restaurant");
 const FoodRoute = require("./routes/Food");
 const RatingRoute = require("./routes/Rating");
-// const AuthRoute = require("./routes/Auth");
-// const UserRoute = require("./routes/User");
+const AuthRoute = require("./routes/Auth");
+const UserRoute = require("./routes/User");
 // const AddressRoute = require("./routes/Address");
 // const CartRoute = require("./routes/Cart");
 // const OrderRoute = require("./routes/Order");
@@ -28,8 +28,8 @@ mongoose.connect(process.env.MONGOURL).then(() => {console.log("ChopNow database
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-// app.use('/', AuthRoute);
-// app.use('/api/users', UserRoute)
+app.use('/', AuthRoute);
+app.use('/api/users', UserRoute)
 app.use('/api/category', CategoryRoute);
 app.use('/api/restaurant', RestaurantRoute);
 app.use('/api/foods', FoodRoute);

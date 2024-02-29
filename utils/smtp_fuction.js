@@ -23,7 +23,8 @@ async function sendEmail(userEmail, message){
     try {
         await transporter.sendMail(mailOptions)
     } catch (error) {
-        console.log("Email verification failed due to: ", error)
+        console.log("Email verification failed due to: ",error)
     }
 
 }
+module.exports = sendEmail;
