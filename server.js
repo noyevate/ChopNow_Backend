@@ -1,12 +1,12 @@
 const express = require('express');
 const app = express();
-const cors = require("cors");
+//const cors = require("cors");
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-// const CategoryRoute = require("./routes/Category");
-// const RestaurantRoute = require("./routes/Restaurant");
-// const FoodRoute = require("./routes/Food");
-// const RatingRoute = require("./routes/Rating");
+const CategoryRoute = require("./routes/Category");
+const RestaurantRoute = require("./routes/Restaurant");
+const FoodRoute = require("./routes/Food");
+const RatingRoute = require("./routes/Rating");
 // const AuthRoute = require("./routes/Auth");
 // const UserRoute = require("./routes/User");
 // const AddressRoute = require("./routes/Address");
@@ -30,10 +30,10 @@ app.use(express.urlencoded({extended: true}));
 
 // app.use('/', AuthRoute);
 // app.use('/api/users', UserRoute)
-// app.use('/api/category', CategoryRoute);
-// app.use('/api/restaurant', RestaurantRoute);
-// app.use('/api/foods', FoodRoute);
-// app.use('/api/ratings', RatingRoute);
+app.use('/api/category', CategoryRoute);
+app.use('/api/restaurant', RestaurantRoute);
+app.use('/api/foods', FoodRoute);
+app.use('/api/ratings', RatingRoute);
 // app.use('/api/cart', CartRoute);
 // app.use('/api/address', AddressRoute);
 // app.use('/api/orders', OrderRoute);
