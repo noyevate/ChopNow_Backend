@@ -9,9 +9,9 @@ const FoodRoute = require("./routes/Food");
 const RatingRoute = require("./routes/Rating");
 const AuthRoute = require("./routes/Auth");
 const UserRoute = require("./routes/User");
-// const AddressRoute = require("./routes/Address");
-// const CartRoute = require("./routes/Cart");
-// const OrderRoute = require("./routes/Order");
+const AddressRoute = require("./routes/Address");
+const CartRoute = require("./routes/Cart");
+const OrderRoute = require("./routes/Order");
 
 
 dotenv.config()
@@ -34,9 +34,9 @@ app.use('/api/category', CategoryRoute);
 app.use('/api/restaurant', RestaurantRoute);
 app.use('/api/foods', FoodRoute);
 app.use('/api/ratings', RatingRoute);
-// app.use('/api/cart', CartRoute);
-// app.use('/api/address', AddressRoute);
-// app.use('/api/orders', OrderRoute);
+app.use('/api/cart', CartRoute);
+app.use('/api/address', AddressRoute);
+app.use('/api/orders', OrderRoute);
 
 
 app.get('/', (req, res) => res.send("Chop Now"))
