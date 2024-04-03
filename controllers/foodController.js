@@ -31,7 +31,7 @@ module.exports = {
             if(code){
                 randomFoodList = await Food.aggregate([
                     {$match: {code}},
-                    {$sample: {size: 3}}
+                    {$sample: {size: 7}}
                 ])
             }
 
@@ -54,6 +54,7 @@ module.exports = {
             res.status(500).json({status:false, message: error.message});
         }
     },
+    
 
     // Restaurant Menu
     getFoodsByRestaurant: async (req, res) => {
@@ -73,16 +74,28 @@ module.exports = {
 
         try {
             const foods = await Food.aggregate([
-                    {$match: {code, category}},
+                    {$match: {category: category, code: code}},
                    
                 ]);  
             if(foods.length === 0){
-                //res.status(200).json([]);
-            };
-            res.status(200).json(foods);
+                console.log()
+                res.status(200).json([]);
+            } else{
+            res.status(200).json(foods)
+            }
         } catch (error) {
             res.status(500).json({status:false, message: error.message});
         }
+    },
+    getallFoodsByCodee: async(req, res) => {
+        const code = req.params.code;
+        try {
+            const foodList = await Food.find({code: code});
+            return res.status(200).json(foodList)
+        } catch (error) {
+            return res.status(500).json({status: false, message: error.message})
+        }
+
     },
     searchFood: async(req, res) => {
         const search = req.params.search;
@@ -115,19 +128,19 @@ module.exports = {
             let foods;
             foods = await Food.aggregate([
                 {$match: {category, code}},
-                {$sample: {size: 10}}
+                {$sample: {size: 3}}
             ])
 
             if(foods.length === 0){
                 foods = await Food.aggregate([
                     {$match: {code}},
-                    {$sample: {size:10}}
+                    {$sample: {size:3}}
                 ]);   
             }
             if(foods.length === 0){
                 foods = await Food.aggregate([
                     {$match: {isAvailable: true}},
-                    {$sample: {size:10}}
+                    {$sample: {size:3}}
                 ]);   
             }
             res.status(200).json(food);

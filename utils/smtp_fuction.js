@@ -15,7 +15,7 @@ async function sendEmail(userEmail, message){
         subject: "ChopNow Verification Code",
         html: `<h1>ChopNow Email Verification</h1>
         <p>Your veriication code is: </p>
-        <h2 style="color: blue;">${verificationCode}</h2>
+        <h2 style="color: blue;">${message}</h2>
         <p>Please ebter this code on the verification page to complete your registration process.</p>
         <p>If you did not request this email, please ignore.</p>`
     };

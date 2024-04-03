@@ -40,6 +40,6 @@ app.use('/api/orders', OrderRoute);
 
 
 app.get('/', (req, res) => res.send("Chop Now"))
-app.listen(process.env.PORT || 6000, () => console.log(`chopNow is running at port  ${process.env.PORT || 6000}!`))
+app.listen(process.env.PORT || 6013, () => console.log(`chopNow is running at port  ${process.env.PORT || 6013}!`))
 
 
