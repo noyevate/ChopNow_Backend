@@ -23,6 +23,9 @@ const OrderSchema = new mongoose.Schema({
     deliveryAddress: {
         type: mongoose.Schema.Types.ObjectId, ref: 'Address', required: true
     },
+    restaurantAddress: {
+        type: String,  required: true
+    },
     paymentMethod: {type: String, required:true},
     orderStatus: {type: String, default: "Pending", enum: ["Placed", "Accepted", "Preparing", "Manual", "Cancelled", "Delivered", "Ready", "Out_For_Delivery",]},
     restaurantId: {type: mongoose.Schema.Types.ObjectId, ref: "Address", required: true},
@@ -44,3 +47,7 @@ const OrderSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Order', OrderSchema)
+
+
+//  samuelnoye35@gmail.com
+//  password123456789

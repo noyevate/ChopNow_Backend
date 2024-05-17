@@ -25,6 +25,33 @@ module.exports = {
             res.status(500).json({status:false, message: error.message}); 
         }
     },
+    getRestaurantByUser: async (req, res) => {
+        const userId = req.params.userId;
+
+        try {
+            const restaurant = await Restaurant.findOne({userId: userId});
+            if (!restaurant) {
+                return res.status(404).json({ status: false, message: "Restaurant not found" });
+            }
+            res.status(200).json(restaurant);
+        } catch (error) {
+            res.status(500).json({ status: false, message: error.message });
+        }
+    },
+
+    getRestaurantbyUserId: async(req, res) => {
+        const userId = req.user.id;
+        try {
+            const restaurant = await Restaurant.find({userId: userId})
+            
+            if (!restaurant) {
+                return res.status(404).json({ status: false, message: "Restaurant not found" });
+            }
+            res.status(200).json(restaurant);
+        } catch (error) {
+            return res.status(500).json({status: false, message:error.message});
+        }
+    },
 
     getRandomRestaurant: async (req, res) => {
         const code = req.params.code;

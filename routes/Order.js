@@ -3,7 +3,8 @@ const orderController = require('../controllers/orderController');
 const {verifyTokenAndAuthorization} = require('../middleware/verifyToken')
 
 router.post("/", verifyTokenAndAuthorization, orderController.placeOrder);
-router.get("/", verifyTokenAndAuthorization, orderController.getUserOrder);
+router.get("/", verifyTokenAndAuthorization,  orderController.getUserOrder);
+router.get("/:restaurantId", verifyTokenAndAuthorization,  orderController.getOrdersByRestaurantId);
 
 
 

@@ -11,6 +11,7 @@ const RestaurantSchema = new mongoose.Schema({
     owner: {type: String, default:true},
     code: {type: String, required:true},
     logoUrl: {type: String, required:true},
+    userId: {type: mongoose.Schema.Types.ObjectId, ref:'Vendor', required:true},
     rating: {type: Number, min:1, max:5, default:3},
     ratingCount: {type: String, default: 267},
     verification: {type: String, default:"Pending", enum: ["Pending", "Verified", "Rejected"]},
@@ -35,3 +36,17 @@ const RestaurantSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Restaurant', RestaurantSchema)
+
+
+
+//  makorstaurant@gmail.com
+
+//samuelnoye35@gmail.com
+//password123456789
+
+
+// shoprite ilorin
+
+// University of ilorin
+
+// Stay at the door

@@ -27,7 +27,7 @@ module.exports = {
             const newUser = new User({
                 username: req.body.username,
                 email: req.body.email,
-                userType: "Client",
+                userType: req.body.userType,
                 password: CryptoJs.AES.encrypt(req.body.password, process.env.SECRET).toString(),
                 otp: otp,
             });
@@ -71,7 +71,7 @@ module.exports = {
                 userType: user.userType,
                 email: user.email,
 
-            }, process.env.JWT_SECRET, {expiresIn: "50d"});
+            }, process.env.JWT_SECRET, {expiresIn: "10h"});
             
             const {password,otp,createdAt,updatedAt, ...others} = user._doc;
             res.status(200).json({...others, userToken})

@@ -30,7 +30,7 @@ module.exports = {
                 }, process.env.JWT_SECRET, {expiresIn: "50d"})
                 const {password, __v, otp, createdAt, ...others} = user._doc
 
-                res.status(200).json({...others})
+                res.status(200).json({...others, userToken})
             } else {
                 return res.status(400).json({status: false, message: "Otp verification failed"})
             }
@@ -49,9 +49,14 @@ module.exports = {
                 user.phoneVerification = true;
                 user.otp = phone;
                 await user.save();
+                const userToken = jwt.sign({
+                    id: user._id,
+                    userType: user.userType,
+                    email: user.email
+                }, process.env.JWT_SECRET, {expiresIn: "50d"})
                 const {password, __v, otp, createdAt, ...others} = user._doc
 
-                res.status(200).json({...others})
+                res.status(200).json({...others, userToken})
             
         } catch (error) {
             return res.status(500).json({status: false, mssage:error.message})
