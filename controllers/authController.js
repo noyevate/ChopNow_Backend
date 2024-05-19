@@ -71,7 +71,7 @@ module.exports = {
                 userType: user.userType,
                 email: user.email,
 
-            }, process.env.JWT_SECRET, {expiresIn: "10h"});
+            }, process.env.JWT_SECRET, {expiresIn: "100h"});
             
             const {password,otp,createdAt,updatedAt, ...others} = user._doc;
             res.status(200).json({...others, userToken})

@@ -27,6 +27,7 @@ const OrderSchema = new mongoose.Schema({
         type: String,  required: true
     },
     paymentMethod: {type: String, required:true},
+    paymentStaus: {type: String, default: "Pending", enum: ["Pending", "Completed", "Failed"]},
     orderStatus: {type: String, default: "Pending", enum: ["Placed", "Accepted", "Preparing", "Manual", "Cancelled", "Delivered", "Ready", "Out_For_Delivery",]},
     restaurantId: {type: mongoose.Schema.Types.ObjectId, ref: "Address", required: true},
     restaurantCoords: [Number],
@@ -34,7 +35,7 @@ const OrderSchema = new mongoose.Schema({
     driverId: {type: String, default: ''},
     rating: {type: Number, min: 1, max: 5, default: 3},
     feedback: {type: String},
-    PromoCode:{type: String, required: true},
+    PromoCode:{type: String},
     discountAmount: {type: Number},
     notes: {type: String},
 },{

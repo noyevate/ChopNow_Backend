@@ -22,11 +22,11 @@ module.exports = {
 
     getUserOrder: async (req, res) => {
         const userId = req.user.id;
-        const {paymentStatus, orderStatus} = req.query;
+        const {paymentMethod, orderStatus} = req.query;
         let query = {userId};
 
-        if(paymentStatus){
-            query.paymentStatus = paymentStatus;
+        if(paymentMethod){
+            query.paymentMethod = paymentMethod;
         };
 
         if(orderStatus === orderStatus) {
@@ -57,4 +57,16 @@ module.exports = {
             res.status(500).json({status: false, message: error.message});
         }
     },
+
+    updateOrderStatus: async (req, res) => {
+        const { orderId } = req.params;
+        const { status } = req.body;
+
+        try {
+            const order = await Order.findByIdAndUpdate(orderId, { orderStatus: status }, { new: true });
+            res.status(201).json({status: true, message: "Order status updated successfully", order});
+        } catch (error) {
+            res.status(500).json({status: false, message: error.message});
+        }
+    }
 }
