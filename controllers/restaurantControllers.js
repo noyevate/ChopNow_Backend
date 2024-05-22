@@ -98,5 +98,28 @@ module.exports = {
         } catch (error) {
             res.status(500).json({status:false, message: error.message}); 
         }
+    },
+
+    restaurantAvailability: async (req, res) => {
+        try {
+            const restaurantId = req.params.id;
+            const restaurant = await Restaurant.findById(restaurantId);
+    
+            if (!restaurant) {
+                return res.status(404).send({ message: 'Restaurant not found' });
+            }
+    
+            restaurant.isAvailabe = !restaurant.isAvailabe;
+
+        const updatedRestaurant = await Restaurant.findByIdAndUpdate(
+            restaurantId,
+            { isAvailabe: restaurant.isAvailabe },
+            { new: true, runValidators: true }
+        );
+
+        res.status(200).send(updatedRestaurant);
+        } catch (error) {
+        res.status(500).send({ message: 'Internal server error', error })}
     }
+    
 }

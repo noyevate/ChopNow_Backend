@@ -44,6 +44,8 @@ module.exports = mongoose.model('Restaurant', RestaurantSchema)
 //samuelnoye35@gmail.com
 //password123456789
 
+//migos@gmail.com
+
 
 // shoprite ilorin
 

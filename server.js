@@ -18,6 +18,11 @@ dotenv.config()
 
 
 
+////
+
+
+
+
 mongoose.connect(process.env.MONGOURL).then(() => {console.log("ChopNow database connected!")}).catch((err) => {err})
 
 // const otp = generateOtp()

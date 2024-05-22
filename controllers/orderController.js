@@ -22,11 +22,11 @@ module.exports = {
 
     getUserOrder: async (req, res) => {
         const userId = req.user.id;
-        const {paymentMethod, orderStatus} = req.query;
+        const {paymentStatus, orderStatus} = req.query;
         let query = {userId};
 
-        if(paymentMethod){
-            query.paymentMethod = paymentMethod;
+        if(paymentStatus){
+            query.paymentStatus = paymentStatus;
         };
 
         if(orderStatus === orderStatus) {
@@ -46,9 +46,17 @@ module.exports = {
 
     getOrdersByRestaurantId: async (req, res) => {
         const { restaurantId } = req.params;
+        const { orderStatus, paymentStatus } = req.query;
+
+        // Validate the required parameters
+        if (!restaurantId || !orderStatus || !paymentStatus) {
+            return res.status(400).json({ status: false, message: "restaurantId, orderStatus, and paymentStatus are required" });
+        }
+
+        let query = { restaurantId, orderStatus, paymentStatus };
 
         try {
-            const orders = await Order.find({ restaurantId }).populate({
+            const orders = await Order.find(query).populate({
                 path: 'orderItems.foodId',
                 select: "imageUrl title rating time"
             });
@@ -57,6 +65,7 @@ module.exports = {
             res.status(500).json({status: false, message: error.message});
         }
     },
+
 
     updateOrderStatus: async (req, res) => {
         const { orderId } = req.params;
